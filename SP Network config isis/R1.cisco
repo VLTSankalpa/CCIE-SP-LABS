@@ -1,0 +1,47 @@
+hostname R1
+!
+no ip domain lookup
+!
+ipv6 unicast-routing
+!
+interface GigabitEthernet0/0
+ no shut
+!
+interface Loopback0
+ ip address 1.1.1.1 255.255.255.255
+ ipv6 address 2001::1/128
+ ip ospf 1 area 0
+ ospfv3 1 area 0
+ ospfv3 1 ipv4 area 0
+!
+interface GigabitEthernet0/0.12
+ encapsulation dot1Q 12
+ ip address 10.1.2.1 255.255.255.0
+ ipv6 address 2001:1:2::1/64
+ ip ospf 1 area 0
+ ospfv3 1 area 0
+ ospfv3 1 ipv4 area 0
+!
+interface GigabitEthernet0/0.15
+ encapsulation dot1Q 15
+ ip address 10.1.5.1 255.255.255.0
+ ipv6 address 2001:1:5::1/64
+!
+interface GigabitEthernet0/0.111
+ encapsulation dot1Q 111
+ ip address 10.1.11.1 255.255.255.0
+ ipv6 address 2001:1:11::1/64
+ ip ospf 1 area 0
+ ospfv3 1 area 0
+ ospfv3 1 ipv4 area 0
+!
+interface GigabitEthernet0/0.112
+ encapsulation dot1Q 112
+ ip address 10.1.12.1 255.255.255.0
+ ipv6 address 2001:1:12::1/64
+ ip ospf 1 area 0
+ ospfv3 1 area 0
+ ospfv3 1 ipv4 area 0
+!
+line con 0
+ exec-timeout 0 0
