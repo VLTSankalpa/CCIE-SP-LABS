@@ -1,0 +1,70 @@
+hostname R2
+!
+no ip domain lookup
+!
+ipv6 unicast-routing
+!
+interface GigabitEthernet0/0
+ no ip address
+ no shut
+ duplex full
+ speed 1000
+ media-type gbic
+ negotiation auto
+!
+interface Loopback0
+ ip address 2.2.2.2 255.255.255.255
+ ipv6 address 2001::2/128
+ ip ospf 1 area 0
+ ipv6 ospf 1 area 0
+!
+interface GigabitEthernet0/0.12
+ encapsulation dot1Q 12
+ ip address 10.1.2.2 255.255.255.0
+ ipv6 address 2001:1:2::2/64
+ ip ospf 1 area 0
+ ipv6 ospf 1 area 0
+!
+interface GigabitEthernet0/0.23
+ encapsulation dot1Q 23
+ ip address 10.2.3.2 255.255.255.0
+ ipv6 address 2001:2:3::2/64
+ ip ospf 1 area 0
+ ipv6 ospf 1 area 0
+!
+interface GigabitEthernet0/0.210
+ encapsulation dot1Q 210
+ ip address 10.2.10.2 255.255.255.0
+ ipv6 address 2001:2:10::2/64
+!
+interface GigabitEthernet0/0.211
+ encapsulation dot1Q 211
+ ip address 10.2.11.2 255.255.255.0
+ ipv6 address 2001:2:11::2/64
+ ip ospf 1 area 0
+ ipv6 ospf 1 area 0
+!
+interface GigabitEthernet0/0.212
+ encapsulation dot1Q 212
+ ip address 10.2.12.2 255.255.255.0
+ ipv6 address 2001:2:12::2/64
+ ip ospf 1 area 0
+ ipv6 ospf 1 area 0
+!
+interface GigabitEthernet0/0.213
+ encapsulation dot1Q 213
+ ip address 10.2.13.2 255.255.255.0
+ ipv6 address 2001:2:13::2/64
+ ip ospf 1 area 0
+ ipv6 ospf 1 area 0
+!
+line con 0
+ exec-timeout 0 0
+!
+router ospf 1
+ log-adjacency-changes
+ passive-interface Loopback0
+!
+ipv6 router ospf 1
+ passive-interface Loopback0
+!

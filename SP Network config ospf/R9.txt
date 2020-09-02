@@ -1,0 +1,26 @@
+hostname R9
+!
+no ip domain lookup
+!
+ipv6 unicast-routing
+!
+interface Gi1
+ no ip address
+ no shut
+!
+interface Loopback0
+ ip address 9.9.9.9 255.255.255.255
+ ipv6 address 2001::9/128
+!
+interface Gi1.89
+ encapsulation dot1Q 89
+ ip address 10.8.9.9 255.255.255.0
+ ipv6 address 2001:8:9::9/64
+!
+interface Gi1.914
+ encapsulation dot1Q 914
+ ip address 10.9.14.9 255.255.255.0
+ ipv6 address 2001:9:14::9/64
+!
+line con 0
+ exec-timeout 0 0

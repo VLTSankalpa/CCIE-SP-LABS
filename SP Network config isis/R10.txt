@@ -1,0 +1,21 @@
+hostname R10
+!
+no ip domain lookup
+!
+ipv6 unicast-routing
+!
+interface Gi1
+ no ip address
+ no shut
+!
+interface Loopback0
+ ip address 10.10.10.10 255.255.255.255
+ ipv6 address 2001::10/128
+!
+interface Gi1.210
+ encapsulation dot1Q 210
+ ip address 10.2.10.10 255.255.255.0
+ ipv6 address 2001:2:10::10/64
+!
+line con 0
+ exec-timeout 0 0

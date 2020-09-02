@@ -1,0 +1,52 @@
+hostname R3
+!
+no ip domain lookup
+!
+ipv6 unicast-routing
+!
+interface GigabitEthernet0/0
+ no ip address
+ no shut
+!
+interface Loopback0
+ ip address 3.3.3.3 255.255.255.255
+ ipv6 address 2001::3/128
+ ip ospf 1 area 0
+ ipv6 ospf 1 area 0
+!
+interface GigabitEthernet0/0.23
+ encapsulation dot1Q 23
+ ip address 10.2.3.3 255.255.255.0
+ ipv6 address 2001:2:3::3/64
+ ip ospf 1 area 0
+ ipv6 ospf 1 area 0
+!
+interface GigabitEthernet0/0.37
+ encapsulation dot1Q 37
+ ip address 10.3.7.3 255.255.255.0
+ ipv6 address 2001:3:7::3/64
+!
+interface GigabitEthernet0/0.312
+ encapsulation dot1Q 312
+ ip address 10.3.12.3 255.255.255.0
+ ipv6 address 2001:3:12::3/64
+ ip ospf 1 area 0
+ ipv6 ospf 1 area 0
+!
+interface GigabitEthernet0/0.313
+ encapsulation dot1Q 313
+ ip address 10.3.13.3 255.255.255.0
+ ipv6 address 2001:3:13::3/64
+ ip ospf 1 area 0
+ ipv6 ospf 1 area 0
+!
+line con 0
+ exec-timeout 0 0
+!
+router ospf 1
+ log-adjacency-changes
+ passive-interface Loopback0
+!
+ipv6 router ospf 1
+ passive-interface Loopback0
+!

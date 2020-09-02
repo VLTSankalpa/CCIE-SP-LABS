@@ -1,0 +1,26 @@
+hostname R7
+!
+no ip domain lookup
+!
+ipv6 unicast-routing
+!
+interface GigabitEthernet0/0
+ no ip address
+ no shut
+!
+interface Loopback0
+ ip address 7.7.7.7 255.255.255.255
+ ipv6 address 2001::7/128
+!
+interface GigabitEthernet0/0.37
+ encapsulation dot1Q 37
+ ip address 10.3.7.7 255.255.255.0
+ ipv6 address 2001:3:7::7/64
+!
+interface GigabitEthernet0/0.713
+ encapsulation dot1Q 713
+ ip address 10.7.13.7 255.255.255.0
+ ipv6 address 2001:7:13::7/64
+!
+line con 0
+ exec-timeout 0 0

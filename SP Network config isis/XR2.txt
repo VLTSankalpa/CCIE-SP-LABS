@@ -1,0 +1,92 @@
+Building configuration...
+!! IOS XR Configuration 6.0.1
+!! Last configuration change at Sun Aug 16 15:13:54 2020 by cisco
+!
+hostname XR2
+logging console debugging
+line console
+ exec-timeout 0 0
+!
+interface MgmtEth0/0/CPU0/0
+ shutdown
+!
+interface Loopback0
+ ip address 12.12.12.12 255.255.255.255
+ ipv6 address 2001::12/128
+!
+interface GigabitEthernet0/0/0/0.112
+ ipv4 address 10.1.12.12 255.255.255.0
+ ipv6 address 2001:1:12::12/64
+ encapsulation dot1q 112
+!
+interface GigabitEthernet0/0/0/0.212
+ ipv4 address 10.2.12.12 255.255.255.0
+ ipv6 address 2001:2:12::12/64
+ encapsulation dot1q 212
+!
+interface GigabitEthernet0/0/0/0.312
+ ipv4 address 10.3.12.12 255.255.255.0
+ ipv6 address 2001:3:12::12/64
+ encapsulation dot1q 312
+!
+interface GigabitEthernet0/0/0/0.1112
+ ipv4 address 10.11.12.12 255.255.255.0
+ ipv6 address 2001:11:12::12/64
+ encapsulation dot1q 1112
+!
+interface GigabitEthernet0/0/0/0.1213
+ ipv4 address 10.12.13.12 255.255.255.0
+ ipv6 address 2001:12:13::12/64
+ encapsulation dot1q 1213
+!
+router isis 1
+ is-type level-2-only
+ net 00.0000.0000.0012.00
+ address-family ipv4 unicast
+ !
+ interface GigabitEthernet0/0/0/0.1112
+  address-family ipv4 unicast
+ interface GigabitEthernet0/0/0/0.112
+  address-family ipv4 unicast
+ interface Loopback0
+  address-family ipv4 unicast
+ interface GigabitEthernet0/0/0/0.212
+  address-family ipv4 unicast
+  !
+ !
+!
+router ospf 1
+ area 0
+  interface Loopback0
+   passive enable
+  !
+  interface GigabitEthernet0/0/0/0.112
+  !
+  interface GigabitEthernet0/0/0/0.212
+  !
+  interface GigabitEthernet0/0/0/0.312
+  !
+  interface GigabitEthernet0/0/0/0.1112
+  !
+  interface GigabitEthernet0/0/0/0.1213
+  !
+ !
+!
+router ospfv3 1
+ area 0
+  interface Loopback0
+   passive disable
+  !
+  interface GigabitEthernet0/0/0/0.112
+  !
+  interface GigabitEthernet0/0/0/0.212
+  !
+  interface GigabitEthernet0/0/0/0.312
+  !
+  interface GigabitEthernet0/0/0/0.1112
+  !
+  interface GigabitEthernet0/0/0/0.1213
+  !
+ !
+!
+end
